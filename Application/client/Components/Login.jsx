@@ -52,6 +52,7 @@ const Login = props => {
       fetch(url, requestOption)
         .then((response) => response.json())
         .then(({ success }) => {
+          console.log('success in login: ', success);
           if (success) navigate('/dashboard');
           else setMessage('Username or password wrong');
         })
@@ -75,7 +76,7 @@ const Login = props => {
   }
 
   //handleSignup => should create new user information in database
-  const handleSignup = async () => {
+  const handleSignup = () => {
     // console.log(username, password);
     // Store username and password in a userInfo object
     const userInfo = {
@@ -96,7 +97,14 @@ const Login = props => {
         body: JSON.stringify(userInfo),
         withCredentials: true,
       }
-      const response = await fetch(url, requestOption);
+        fetch(url, requestOption)
+        // .then((response) => response.json())
+        .then((success) => {
+          console.log('success: ', success.body);
+          if (success) navigate('/dashboard');
+          else setMessage('Username is Taken');
+        })
+        .catch(err => console.log(err))
     }
   }
 
