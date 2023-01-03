@@ -40,16 +40,10 @@ app.use(
 
 // const server = http.createServer(app);
 
-//route for new user sign up
-app.post('/user/signup', userController.signup, (req, res) => {
-  return res.status(200).json();
-});
+// ROUTES
+app.use('/user', userRouter);
 
-//route for user regular log in
-app.post('/user/login', userController.login, (req, res) => {
-  req.session.save();
-  return res.status(200).json(res.locals.validate);
-});
+//route for new user sign up
 
 //route for creating a new project
 app.post('/create/project', userController.createProject, (req, res) => {
