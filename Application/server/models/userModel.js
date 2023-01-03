@@ -8,7 +8,8 @@ const userSchema = mongoose.Schema({
     // thrown with the specified error message
     // Check the link below for mongoose built-in validators
     // https://mongoosejs.com/docs/validation.html#custom-error-messages
-    required: [true, 'Please add a username']
+    required: [true, 'Please add a username'],
+    unique: [true, 'Username is taken.']
   },
   password: {
     type: String,
