@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 
 let env = dotenv.config();
 
@@ -11,18 +11,23 @@ const connectDB = async () => {
     // const conn = await mongoose.connect(process.env.MONGO_URI);
 
     //for testing purpose only
-    const URI = process.env.MONGO_URI_TEST;
+    const URI =
+      'mongodb+srv://admin:adminPassword@cluster0.opir5pn.mongodb.net/?retryWrites=true&w=majority';
     const conn = await mongoose.connect(URI);
     console.log('MongoDB connected');
 
+    /*
+MONGO_URI = 'mongodb+srv://admin:adminPassword@cluster0.6jzitkw.mongodb.net/?retryWrites=true&w=majority'
+MONGO_URI_TEST = 'mongodb+srv://rachel:powerClap@dataportal.hyltuzo.mongodb.net/?retryWrites=true&w=majority'
+    */
 
     // Console log the local host if the connection is successful
     // console.log(`MongoDB Connected: ${ conn.connection.host }`.cyan.underline);
-  // The error handler
+    // The error handler
   } catch (error) {
     console.log(error);
     process.exit(1);
   }
-}
+};
 
 export default connectDB;
