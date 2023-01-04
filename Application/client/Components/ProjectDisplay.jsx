@@ -12,7 +12,7 @@ const ProjectDisplay = props => {
 
   //useEffect will fetch the task cards from backend and update the state?
   useEffect(() => {
-    const url = 'http://localhost:3000/read/task';
+    const url = 'http://localhost:3000/task';
     // console.log('how many times is useEffect fired?')
     if (!task.length) {
       fetch(url)
@@ -43,7 +43,8 @@ const ProjectDisplay = props => {
     }
     // console.log(taskInfo);
 
-    const url = 'http://localhost:3000/create/task?' + new URLSearchParams(taskInfo);
+    const url = 'http://localhost:3000/tasks/?' + new URLSearchParams(taskInfo);
+    console.log('This is the url: ', url)
     const requestOption = {
       method: 'POST'
     }
@@ -61,7 +62,7 @@ const ProjectDisplay = props => {
   const handleClick = e => {
     // console.log('Is handleClick fired?');
     // console.log('e.target.: ', e.target.value);
-    const url = 'http://localhost:3000/delete/task';
+    const url = 'http://localhost:3000/task';
     const requestOption = {
       method: 'DELETE',
       headers: {'Content-Type': 'application/json'},
@@ -84,7 +85,7 @@ const ProjectDisplay = props => {
   const stageClick = e => {
     console.log('e.target.value: ', e.target.value);
     // console.log('e.target.stage', e.target.stage);
-    const url = 'http://localhost:3000/patch/task';
+    const url = 'http://localhost:3000/task';
     const requestOption = {
       method: 'PATCH',
       headers: {'Content-Type': 'application/json'},

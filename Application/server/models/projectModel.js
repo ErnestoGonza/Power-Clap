@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+const mongoose = require('mongoose');
 
 const projectSchema = mongoose.Schema({
   projectName: {
@@ -17,12 +17,12 @@ const projectSchema = mongoose.Schema({
   // },
   members: [{type: String}],
   creator: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
   },
-  tasks: [{ type: Schema.Types.ObjectId, ref: 'Card' }],
+  tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Card' }],
 })
 
 
 const Project = mongoose.model('Project', projectSchema);
 
-export default Project;
+module.exports = Project;

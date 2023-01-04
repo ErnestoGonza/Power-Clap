@@ -1,6 +1,6 @@
-import User from '../models/userModel.js';
-import Project from '../models/projectModel.js';
-import Card from '../models/cardModel.js';
+const User = require('../models/userModel.js');
+const Project = require('../models/projectModel.js');
+const Card = require('../models/cardModel.js');
 
 const userController = {};
 
@@ -228,4 +228,4 @@ userController.getTasks = (req, res, next) => {
   });
 }
 
-export default userController;
+module.exports = userController;
