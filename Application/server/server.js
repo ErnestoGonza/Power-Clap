@@ -1,139 +1,79 @@
-import express from 'express';
-import cors from 'cors';
-import userController from './controllers/userController.js';
-import session from 'express-session';
-import passport from 'passport';
-import './authenticate.js';
+// import express from 'express';
+// import cors from 'cors';
+// import userController from './controllers/userController.js';
+// import session from 'express-session';
+// import './authenticate.js';
+// // import cookieParser from 'cookie-parser';
+// // import http from 'http';
+// import dotenv from 'dotenv';
+// dotenv.config();
+// // Make sure server is connected to mongoDB database
+// import connectDB from './db.js';
+// const app = express();
+// const port = process.env.PORT || 3000;
+// connectDB();
+
+
+const express = require('express');
+const cors = require('cors');
+const userController = require('./controllers/userController.js');
+const session = require('express-session');
 // import cookieParser from 'cookie-parser';
 // import http from 'http';
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 dotenv.config();
 // Make sure server is connected to mongoDB database
-import connectDB from './db.js';
-connectDB();
-
+const connectDB = require('./db.js');
 const port = process.env.PORT || 3000;
 const app = express();
+connectDB();
 
-// to make sure server can talk to the frondend without CORS restriction
-app.use(
-  cors({
-    credentials: true,
-    origin: 'http://localhost:5173',
-  })
-);
+// Server connects to the frondend without CORS restriction
+app .use(cors({
+        credentials: true,
+        origin: 'http://localhost:5173',
+    }))
+    // Enable request body parser
+    .use(express.json())
+    .use(express.urlencoded({ extended: true }))
+    // Sessions
+    .use(session({
+        secret: /*process.env.SECRET*/ 'YPUWB0EX9ISPOTMX7Q7W',
+        resave: false,
+        saveUninitialized: true,
+      })
+    )
+    // .use(cookieParser());
 
-// to enable request body parser
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-// sessions
-app.use(
-  session({
-    secret: /*process.env.SECRET*/ 'YPUWB0EX9ISPOTMX7Q7W',
-    resave: false,
-    saveUninitialized: true,
-  })
-);
+// import userRouter from './routes/userRouter';
+// import taskRouter from './routes/taskRouter';
+// import userinfoRouter from './routes/userinfoRouter';
+// import authRouter from './routes/authRouter';
 
-// app.use(cookieParser());
-
-// const server = http.createServer(app);
+const userRouter = require('./routes/userRouter');
+const taskRouter = require('./routes/taskRouter');
+const userinfoRouter = require('./routes/userinfoRouter');
+const authRouter = require('./routes/authRouter');
 
 // ROUTES
-app.use('/user', userRouter);
+app .use('/tasks', taskRouter)
+    .use('/userinfo', userinfoRouter)
+    .use('/user', userRouter)
+    .use('/auth', authRouter)
 
-//route for new user sign up
 
 //route for creating a new project
 app.post('/create/project', userController.createProject, (req, res) => {
   return res.status(200).json(res.locals.currProject);
 });
 
-//route for creating a new task for a specific project
-app.post('/create/:task', userController.createTask, (req, res) => {
-  return res.status(200).json(res.locals.currTask);
-});
-
-//route for updating the stage info for a specific task
-app.patch('/patch/task', userController.changeStage, (req, res) => {
-  return res.status(200).json(res.locals.updatedTask);
-});
-
-//route for deleting a specific task
-app.delete('/delete/task', userController.deleteTask, (req, res) => {
-  return res.status(200).json(res.locals.deletedTask);
-});
-
-//route for getting all task info to display at the frontend
-app.get('/read/task', userController.getTasks, (req, res) => {
-  return res.status(200).json(res.locals.card);
-});
-
-// for testing:
-app.get('/users', userController.getUsers, (req, res) => {
-  return res.status(200).json(res.locals.users);
-});
-
 // app.get('/dashboard', (req, res) => {
 //   return res.status(200).json();
 // })
 
-app.get('/userinfo', (req, res) => {
-  if (req.session.user) {
-    console.log('user found! username: ', req.session.user);
-    res.status(200).json(req.session.user);
-  } else console.log('user not found');
-});
 
-app.get(
-  '/userinfo/projects',
-  (req, res, next) => {
-    console.log('REQ.SESSION.USER', req.session.user);
-    next();
-  },
-  userController.getProjects,
-  (req, res) => {
-    console.log('PROJECT RESULTS: ', res.locals.projects);
-    res.status(200).json(res.locals.projects);
-  }
-);
-
-// *** google OAuth ***
-// This will send a request to the Google OAuth 2.0 server, asking the user to grant permission
-// to your app to access their Google account. The scope parameter specifies the information
-// that you are requesting access to (in this case, the user's email and profile).
-// Passport middleware
-// configPassport(passport);
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.get(
-  '/auth/google',
-  passport.authenticate('google', { scope: ['email', 'profile'] })
-);
-
-// Google will redirect the user to after they have granted or denied consent.
-// This route is also handled by the passport.authenticate('google') middleware,
-// which will either redirect the user to the '/dashboard' route on success
-// or the '/auth/failure' route on failure.
-app.get(
-  '/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/auth/failure' }),
-  function (res, req) {
-    res.redirect('/dashboard');
-  }
-);
-
-app.get('/auth/failure', (req, res) => {
-  res.send('something went wrong..');
-});
-
-app.post('/user/getProject', userController.getProject, (req, res) => {
-  res.status(200).json();
-});
-
-//route for url not existed
+// 404 Error
 app.use((req, res) => {
   res.status(404).send("This is not the page you're looking for...");
 });
@@ -153,7 +93,3 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
-
-// server.listen(port, () => {
-//   console.log(`Listening on port ${port}`);
-// });
