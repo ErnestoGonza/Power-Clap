@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const cardSchema = mongoose.Schema({
-  project: {
-    type: String,
-    required: true
-  },
   description: {
     type: String,
     required: true,
@@ -18,6 +14,7 @@ const cardSchema = mongoose.Schema({
   //3 for 'to verify'
   //4 for 'completed'
   stage: {type: Number},
+  project: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }],
 })
 
 

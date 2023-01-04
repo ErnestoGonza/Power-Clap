@@ -9,13 +9,13 @@ const userSchema = mongoose.Schema({
     // Check the link below for mongoose built-in validators
     // https://mongoosejs.com/docs/validation.html#custom-error-messages
     required: [true, 'Please add a username'],
-    unique: [true, 'Username is taken.']
+    unique: true
   },
   password: {
     type: String,
     required: [true, 'Please add a password']
   },
-  projects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }]
+
 },
   {
     timestamps: true

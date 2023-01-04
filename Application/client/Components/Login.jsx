@@ -100,7 +100,6 @@ const Login = props => {
         fetch(url, requestOption)
         // .then((response) => response.json())
         .then((success) => {
-          console.log('success: ', success.body);
           if (success) navigate('/dashboard');
           else setMessage('Username is Taken');
         })
@@ -109,7 +108,6 @@ const Login = props => {
   }
 
   // asdfadf
-dddd
   // const onSuccess = (res) => {
   //   console.log("LOGIN SUCCESS! Current user: ", res.profileObj);
   // }

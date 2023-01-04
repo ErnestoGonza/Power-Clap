@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const projectSchema = mongoose.Schema({
   projectName: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
 
   projectDescription: {
@@ -19,7 +20,7 @@ const projectSchema = mongoose.Schema({
   creator: {
     type: mongoose.Schema.Types.ObjectId,
   },
-  tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Card' }],
+  user: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 })
 
 

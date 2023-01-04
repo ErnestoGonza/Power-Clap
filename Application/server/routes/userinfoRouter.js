@@ -1,5 +1,5 @@
 const express = require('express');
-const userController = require('../controllers/userController');
+const userinfoController = require('../controllers/userinfoController');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     } else console.log('user not found');
   });
   
-  router.get('/projects', userController.getProjects, (req, res) => {
+  router.get('/projects', userinfoController.getProjects, (req, res) => {
     //   console.log('PROJECT RESULTS: ', res.locals.projects);
       res.status(200).json(res.locals.projects);
     }
