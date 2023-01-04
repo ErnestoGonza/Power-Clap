@@ -1,16 +1,25 @@
 const User = require('../models/userModel.js');
 const Project = require('../models/projectModel.js');
 const Card = require('../models/cardModel.js');
+const SALT_WORK_FACTOR = 10;
+const bcrypt = require('bcryptjs');
 
 const userController = {};
 
-userController.signup = (req, res, next) => {
-  //console.log('Should see username and password info: ', req.body);
-  //destructuring from req.body
-  const { username, password } = req.body;
+userController.signup = async (req, res, next) => {
+  let { username, password } = req.body;
+
+  await bcrypt.hash(password, SALT_WORK_FACTOR)
+    .then((hashedPW) => {
+      console.log('hashedPW', hashedPW) 
+      password = hashedPW
+    })
+    .catch(err => console.log(err));
+
   try {
     User.create({ username, password }, (err, newUser) => {
       if (err) {
+        console.log("Error in signup controller: ", err);
         return next({
           log: 'Mongoose create handler error',
           status: 400,
@@ -30,12 +39,11 @@ userController.signup = (req, res, next) => {
   }
 }
 
-userController.login = (req, res, next) => {
-  console.log('login');
+userController.login = async (req, res, next) => {
   const { username, password } = req.body;
 
   try {
-    User.findOne({ username, password }, (err, currUser) => {
+    User.findOne({ username }, (err, currUser) => {
       if (err) {
         return next({
           log: 'Mongoose findOne handler error',
@@ -45,23 +53,29 @@ userController.login = (req, res, next) => {
       } else {
         // if username and password are found and matched in database, proceed to the next middleware
         if (currUser) {
-          req.session.user = currUser.username;
-          req.session.save();
-          res.locals.validate = { success: true };
-          // res.locals.currUser = currUser;
-          // return next({
-          //   log: 'Express error handler caught userController.login middleware error',
-          //   status: 400,
-          //   message: {err: `${err}`}
-          // });
-        } else {
-          //if findOne return a null, then the username and password not matching, return status 404 for not found
-          res.locals.validate = { success: false };
-          //status code 401 means 'unauthenticated' or 'unauthorized'
-          // return res.status(401).json();
+          console.log('currUser', currUser)
+          const hashed = currUser.password
+
+          bcrypt.compare(password, hashed)
+            .then(result => {
+              //result returns a boolean value
+              if(result) {
+                req.session.user = currUser.username;
+                req.session.save();
+                res.locals.validate = { success: true };
+                return next();
+              } else {
+                res.locals.validate = { success: false };
+                return next();
+              }
+            })
+            .catch(err => {
+              return next({
+                log: 'Express error handler caught userController.login middleware error',
+                status: 400,
+                message: {err: `${err}`}
+              })});
         }
-        next();
-        // res.next();
       }
     })
   } catch (err) {
