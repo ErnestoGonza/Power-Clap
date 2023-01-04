@@ -58,7 +58,7 @@ const ProjectDisplay = props => {
   }
   
 
-  //handleClick is for each child task card to delete
+  // HandleClick is for each child task card to delete
   const handleClick = e => {
     // console.log('Is handleClick fired?');
     // console.log('e.target.: ', e.target.value);
@@ -134,8 +134,6 @@ const ProjectDisplay = props => {
     <>
       <div className='form-container'>Create Task Form
         <form className='form' onSubmit={handleSubmit}>
-          <label htmlFor='members' id='members' name='members'>Members: </label>
-          <input type='text' id='members' name='members' placeholder='members'></input><br />
           <label htmlFor='description' id='description' name='description'>Task Description: </label>
           <input type='text' id='description' name='description' placeholder='description'></input><br />
           <label htmlFor='dateStarted' id='dateStarted' name='dateStarted'>Date Started: </label>

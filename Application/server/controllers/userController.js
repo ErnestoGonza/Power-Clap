@@ -69,103 +69,6 @@ userController.login = (req, res, next) => {
   }
 }
 
-
-userController.createProject = (req, res, next) => {
-  // console.log('should get project info', req.body)
-  const { projectName, projectDescription, members, creator } = req.body;
-  try {
-    User.findOne({ username: creator })
-      .then((user) => {
-        console.log('USER: ', user);
-        console.log('CREATOR: ', creator);
-        Project.create({ projectName, projectDescription, members, creator: user.id }, (err, currProject) => {
-          if (err) {
-            return next({
-              log: 'Mongoose Project.create handler error',
-              status: 400,
-              message: { err: `${err}` }
-            });
-          } else {
-            res.locals.currProject = currProject;
-            User.findOneAndUpdate(
-              { username: creator },
-              { $push: { projects: currProject.id } },
-              (err, success) => {
-                if (err) console.log(err);
-                if (success) console.log(success);
-              })
-            next();
-          }
-        })
-      })
-  } catch (err) {
-    return next({
-      log: 'Express error handler caught userController.createProject middleware error',
-      status: 400,
-      message: { err: `${err}` }
-    })
-  }
-}
-
-userController.getProjects = async (req, res, next) => {
-  const user = await User.findOne({ username: req.session.user });
-  let projects = [];
-  if (user) {
-    projects = await Project.find({ '_id': { $in: user.projects } });
-  }
-  res.locals.projects = projects.map((project) => project.projectName);
-  next();
-};
-
-userController.createTask = (req, res, next) => {
-  console.log('inside create Task');
-  console.log('req.query: ', req.query);
-  const { project, description, responsibleBy, startDate, deadline, stage } = req.query;
-
-  try {
-    Card.create({ project, description, responsibleBy, startDate, deadline, stage }, (err, currTask) => {
-      if (err) {
-        return next({
-          log: 'Mongoose creatTask error',
-          status: 400,
-          message: { err: `${err}` }
-        })
-      } else {
-        console.log(currTask);
-        res.locals.currTask = currTask;
-        return next()
-      }
-    })
-  } catch (err) {
-    return next({
-      log: 'Express error handler caught userController.createTask middleware error',
-      status: 400,
-      message: { err: `${err}` }
-    })
-  }
-
-}
-
-userController.deleteTask = (req, res, next) => {
-  // console.log('req.body: ', req.body);
-  try {
-    Card.findOneAndDelete({ _id: req.body.id }, (err, deletedTask) => {
-      if (err) console.log(err);
-      else {
-        // console.log(deletedTask);
-        res.locals.deletedTask = deletedTask;
-        return next();
-      }
-    })
-  } catch (err) {
-    return next({
-      log: 'Express error handler caught userController.deleteTask middleware error',
-      status: 400,
-      message: { err: `${err}` }
-    })
-  }
-}
-
 userController.getProject = (req, res, next) => {
   const { projectId } = req.body;
   try {
@@ -183,29 +86,6 @@ userController.getProject = (req, res, next) => {
   }
 }
 
-userController.changeStage = (req, res, next) => {
-  // console.log(req.body.data);
-  // console.log('req.body.data typeof: ',typeof req.body.data)
-  const dataArr = req.body.data.split(',');
-  // console.log(dataArr);
-  try {
-    Card.findOneAndUpdate({ _id: dataArr[0] }, { stage: parseInt(dataArr[1]) + 1 }, { new: true }, (err, updatedTask) => {
-      if (err) console.log(err);
-      else {
-        // console.log(updatedTask.stage);
-        res.locals.updatedTask = updatedTask;
-        return next();
-      }
-    })
-  } catch (err) {
-    return next({
-      log: 'Express error handler caught userController.changeState middleware error',
-      status: 400,
-      message: { err: `${err}` }
-    });
-  }
-}
-
 
 
 userController.getUsers = (req, res, next) => {
@@ -217,15 +97,6 @@ userController.getUsers = (req, res, next) => {
   });
 }
 
-userController.getTasks = (req, res, next) => {
-  // console.log('inside getTasks');
-  Card.find({}, (error, card) => {
-    // todo: better error handling
-    if (error) return next(error);
-    res.locals.card = card;
-    // console.log('res.locals.card: ', res.locals.card);
-    return next();
-  });
-}
+
 
 module.exports = userController;
