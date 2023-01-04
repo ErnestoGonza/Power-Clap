@@ -98,10 +98,9 @@ const Login = props => {
         withCredentials: true,
       }
         fetch(url, requestOption)
-        // .then((response) => response.json())
-        .then((success) => {
-          console.log('success: ', success);
-          if (success) navigate('/dashboard');
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.username) navigate('/dashboard');
           else setMessage('Username is Taken');
         })
         .catch(err => console.log(err))
