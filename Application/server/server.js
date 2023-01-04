@@ -1,19 +1,3 @@
-// import express from 'express';
-// import cors from 'cors';
-// import userController from './controllers/userController.js';
-// import session from 'express-session';
-// import './authenticate.js';
-// // import cookieParser from 'cookie-parser';
-// // import http from 'http';
-// import dotenv from 'dotenv';
-// dotenv.config();
-// // Make sure server is connected to mongoDB database
-// import connectDB from './db.js';
-// const app = express();
-// const port = process.env.PORT || 3000;
-// connectDB();
-
-
 const express = require('express');
 const cors = require('cors');
 const userController = require('./controllers/userController.js');
@@ -28,7 +12,7 @@ const port = process.env.PORT || 3000;
 const app = express();
 connectDB();
 
-// Server connects to the frondend without CORS restriction
+// Server connects to the frontend without CORS restriction
 app .use(cors({
         credentials: true,
         origin: 'http://localhost:5173',
@@ -45,12 +29,6 @@ app .use(cors({
     )
     // .use(cookieParser());
 
-
-// import userRouter from './routes/userRouter';
-// import taskRouter from './routes/taskRouter';
-// import userinfoRouter from './routes/userinfoRouter';
-// import authRouter from './routes/authRouter';
-
 const userRouter = require('./routes/userRouter');
 const taskRouter = require('./routes/taskRouter');
 const userinfoRouter = require('./routes/userinfoRouter');
@@ -63,7 +41,7 @@ app .use('/tasks', taskRouter)
     .use('/auth', authRouter)
 
 
-//route for creating a new project
+// Route for creating a new project
 app.post('/create/project', userController.createProject, (req, res) => {
   return res.status(200).json(res.locals.currProject);
 });
