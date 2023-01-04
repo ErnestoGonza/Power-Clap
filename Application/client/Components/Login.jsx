@@ -108,25 +108,8 @@ const Login = props => {
     }
   }
 
-  //handleGoogle send request to backend for google Oauth
-  const handleGoogle = () => {
-    // fetch('/auth/google', {
-    //   method: 'GET',
-    //   credentials: 'include'
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   // do something with the data
-    //   console.log('OAuth data: ', data);
-    // })
-    // .catch(error => {
-    //   console.error('OAuth error:', error);
-    // })
-    // console.log('This should send request for google Oauth');
-    
-    window.location.replace("/auth/google");
-  }
-
+  // asdfadf
+dddd
   // const onSuccess = (res) => {
   //   console.log("LOGIN SUCCESS! Current user: ", res.profileObj);
   // }
@@ -146,7 +129,7 @@ const Login = props => {
       <p style={{color: 'red'}}>{message}</p>
       <button onClick={handleLogin}>Log In</button>
       <button onClick={handleSignup}>Sign Up</button>
-      <p><button onClick={handleGoogle}>Login with Google</button></p>
+      {/* <p><button onClick={handleGoogle}>Login with Google</button></p> */}
       
     </div>
   )
@@ -164,3 +147,22 @@ export default Login;
         cookiePolicy={'single_host_origin'}
         isSignedIn={true}
       /> */}
+
+//handleGoogle send request to backend for google Oauth
+      // const handleGoogle = () => {
+        // fetch('/auth/google', {
+        //   method: 'GET',
+        //   credentials: 'include'
+        // })
+        // .then(response => response.json())
+        // .then(data => {
+        //   // do something with the data
+        //   console.log('OAuth data: ', data);
+        // })
+        // .catch(error => {
+        //   console.error('OAuth error:', error);
+        // })
+        // console.log('This should send request for google Oauth');
+        
+        // window.location.replace("/auth/google");
+      // }
