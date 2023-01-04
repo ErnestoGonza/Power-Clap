@@ -100,6 +100,7 @@ const Login = props => {
         fetch(url, requestOption)
         // .then((response) => response.json())
         .then((success) => {
+          console.log('success: ', success);
           if (success) navigate('/dashboard');
           else setMessage('Username is Taken');
         })
