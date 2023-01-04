@@ -10,9 +10,22 @@ const ProjectDisplay = props => {
   const [changed, setChanged] = useState([]);
   const [projectId, setProjectId] = useState(null);
 
+
+//   useEffect( () => {
+//     fetch('http://localhost:3000/journals?' + new URLSearchParams({
+//         user: '63b3234df79c9575703ac220'
+//     }))
+//     .then((response) => response.json())
+//     .then(data => {
+//         setEntries(data);
+//     })
+// }, [entries, setEntries])
+
+
+
   //useEffect will fetch the task cards from backend and update the state?
   useEffect(() => {
-    const url = 'http://localhost:3000/task';
+    const url = 'http://localhost:3000/tasks';
     // console.log('how many times is useEffect fired?')
     if (!task.length) {
       fetch(url)
@@ -32,26 +45,25 @@ const ProjectDisplay = props => {
   //handleSubmit is going to handle creating new task card
   const handleSubmit = e => {
     e.preventDefault();
-
-    const taskInfo = {
-      project: '63b0c014072cf2ff4951654d',
-      description: e.target.description.value,
-      responsibleBy: e.target.responsible.value,
-      startDate: e.target.dateStarted.value,
-      deadline: e.target.deadline.value,
-      stage: 1,
-    }
+  const taskInfo = {
+        project : '63b0c014072cf2ff4951654d',
+        description: e.target.description.value,
+        responsibleBy: e.target.responsible.value,
+        startDate: e.target.dateStarted.value,
+        deadline: e.target.deadline.value,
+        stage: 1,
+      }
     // console.log(taskInfo);
 
-    const url = 'http://localhost:3000/tasks/?' + new URLSearchParams(taskInfo);
+    const url = 'http://localhost:3000/tasks/task?' + new URLSearchParams(taskInfo)
     console.log('This is the url: ', url)
     const requestOption = {
-      method: 'POST'
-    }
+      method: 'POST',
+    };
     fetch(url, requestOption)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        console.log('We entered');
         setTask(task => [...task, data]);
       })
       .catch(err => console.log(err))
@@ -62,7 +74,7 @@ const ProjectDisplay = props => {
   const handleClick = e => {
     // console.log('Is handleClick fired?');
     // console.log('e.target.: ', e.target.value);
-    const url = 'http://localhost:3000/task';
+    const url = 'http://localhost:3000/tasks';
     const requestOption = {
       method: 'DELETE',
       headers: {'Content-Type': 'application/json'},
@@ -85,7 +97,7 @@ const ProjectDisplay = props => {
   const stageClick = e => {
     console.log('e.target.value: ', e.target.value);
     // console.log('e.target.stage', e.target.stage);
-    const url = 'http://localhost:3000/task';
+    const url = 'http://localhost:3000/tasks';
     const requestOption = {
       method: 'PATCH',
       headers: {'Content-Type': 'application/json'},

@@ -6,6 +6,7 @@ const userinfoController = {};
 
 userinfoController.getProjects = async (req, res, next) => {
   const user = await User.findOne({ username: req.session.user });
+  console.log('User inside getProjects func: ',user);
   let projects = [];
   if (user) {
     projects = await Project.find({ '_id': { $in: user.projects } });

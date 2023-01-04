@@ -39,7 +39,7 @@ const CreateProject = props => {
       return;
     } else {
       //send projectInfo to the backend route /create/project
-      const url = 'http://localhost:3000/create/project';
+      const url = 'http://localhost:3000/project';
       const userUrl = 'http://localhost:3000/userinfo';
       fetch(userUrl, { method: 'GET', credentials: 'include' })
         .then((res) => res.json())

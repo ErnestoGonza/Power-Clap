@@ -7,6 +7,7 @@ import './App.css'
 import React from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import Login from './Components/Login.jsx';
+import LoginContainer from './Components/LoginContainer.jsx';
 import Dashboard from './Components/Dashboard.jsx';
 import CreateProject from './Components/CreateProject.jsx';
 import ProjectDisplay from './Components/ProjectDisplay.jsx';
@@ -36,7 +37,8 @@ const App = props => {
       </div>
 
       <Routes>
-        <Route path='/' element={<Login />} />
+        {/* <Route path='/' element={<Login />} /> */}
+        <Route path='/' element={<LoginContainer />} />
         <Route path='/dashboard' element={<><CreateProject /><Dashboard /></>} />
         <Route path='/test' element={<ProjectDisplay />} />
       </Routes>

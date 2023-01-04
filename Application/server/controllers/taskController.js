@@ -6,9 +6,8 @@ const taskController = {};
 
 taskController.createTask = (req, res, next) => {
   console.log('inside create Task');
-  console.log('req.query: ', req.query);
-  const { project, description, responsibleBy, startDate, deadline, stage } = req.query;
-
+  console.log(req.params);
+  const { project,description, responsibleBy, startDate, deadline, stage } = req.query
   try {
     Card.create({ project, description, responsibleBy, startDate, deadline, stage }, (err, currTask) => {
       if (err) {
