@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const googleSchema = mongoose.Schema({
   googleId: {
@@ -31,4 +31,4 @@ const googleSchema = mongoose.Schema({
 
 const googleUser = mongoose.model('googleUser', googleSchema);
 
-export default googleUser;
+module.exports = googleUser;

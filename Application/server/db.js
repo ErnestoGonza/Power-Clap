@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
 let env = dotenv.config();
 
@@ -30,4 +30,4 @@ MONGO_URI_TEST = 'mongodb+srv://rachel:powerClap@dataportal.hyltuzo.mongodb.net/
   }
 };
 
-export default connectDB;
+module.exports = connectDB;

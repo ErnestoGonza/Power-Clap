@@ -1,8 +1,8 @@
-import passport from 'passport';
-import { Strategy as GoogleStrategy } from 'passport-google-oauth2';
-import mongoose from 'mongoose';
-import googleUser from './models/googleModel.js';
-import dotenv from 'dotenv';
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth2').Strategy;
+const mongoose = require('mongoose');
+const googleUser = require('./models/googleModel.js');
+const dotenv = require('dotenv');
 // require('dotenv').config()
 // dotenv.config();
 
@@ -36,3 +36,6 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((id, done) => {
   done(null, user);
 });
+
+const googlePassport = passport;
+module.exports = googlePassport;
