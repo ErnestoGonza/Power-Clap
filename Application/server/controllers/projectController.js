@@ -1,17 +1,19 @@
 const User = require('../models/userModel.js');
 const Project = require('../models/projectModel.js');
-const Card = require('../models/cardModel.js');
+
 
 const projectController = {};
 
+
+/* This is a controller function that creates a new project. It takes in the project name, description,
+members, and creator from the request body. It then finds the user that created the project and
+creates a new project with the project name, description, members, and creator. It then pushes the
+project id to the user's projects array. */
 projectController.createProject = (req, res, next) => {
-  // console.log('should get project info', req.body)
   const { projectName, projectDescription, members, creator } = req.body;
   try {
     User.findOne({ username: creator })
       .then((user) => {
-        console.log('USER: ', user);
-        console.log('CREATOR: ', creator);
         Project.create({ projectName, projectDescription, members, creator: user.id }, (err, currProject) => {
           if (err) {
             return next({
