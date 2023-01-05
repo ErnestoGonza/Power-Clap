@@ -9,23 +9,24 @@ const Dashboard = () => {
     method: 'GET',
     credentials: 'include',
   }
-  // if (username === null) {
 
-  // }
   const projectUrl = 'http://localhost:3000/userinfo/projects';
   useEffect(() => {
     fetch(url, requestOption)
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
+        console.log('DATA FROM FIRST FETCH REQUEST IN DASHBOARD:', data);
         setUsername(data);
-      });
+      })
+      .catch(err => console.log('ERR in /userinfo fetch request', err));
     if (!projects.length) {
       fetch(projectUrl, requestOption)
-        .then((res) => res.json())
-        .then((data) => {
+        .then(res => res.json())
+        .then(data => {
           console.log(data);
           setProjects(data);
         })
+        .catch(err => console.log('ERR in /userinfo/projects fetch request', err))
     }
   }, [])
 

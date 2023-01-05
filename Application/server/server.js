@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const userController = require('./controllers/userController.js');
 const session = require('express-session');
 const dotenv = require('dotenv');
 dotenv.config();
@@ -12,19 +11,17 @@ connectDB();
 
 // Server connects to the frontend without CORS restriction
 app .use(cors({
-        credentials: true,
-        origin: 'http://localhost:5173',
+      origin: 'http://localhost:5173',
+      credentials: true,
     }))
-    // Enable request body parser
     .use(express.json())
     .use(express.urlencoded({ extended: true }))
     // Sessions
     .use(session({
         secret: /*process.env.SECRET*/ 'YPUWB0EX9ISPOTMX7Q7W',
         resave: false,
-        saveUninitialized: true,
-      })
-    )
+        saveUninitialized: true
+    }))
 
 
 const userRouter = require('./routes/userRouter');

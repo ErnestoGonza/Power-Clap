@@ -1,6 +1,7 @@
 const express = require('express');
 const userinfoController = require('../controllers/userinfoController');
 const router = express.Router();
+// const session = require('express-session');
 
 router.get('/projects', 
   (req, res, next) => {
@@ -15,6 +16,7 @@ router.get('/projects',
 
 router.get('/', (req, res) => {
     // console.log('userInfoRouter request: ', req)
+    console.log('L19 USERINFOROUTER: ', req.session); // undefined
     if (req.session.user) {
       console.log('userInfoRouter user found! username: ', req.session.user);
       res.status(200).json(req.session.user);

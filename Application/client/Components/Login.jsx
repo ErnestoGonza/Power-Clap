@@ -35,9 +35,11 @@ const Login = ({ toggleForm }) => {
     } else {
       fetch('http://localhost:3000/user/login', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(userInfo),
-        withCredentials: true
+        // credentials: 'include',
       })
         .then((response) => response.json())
         .then(({ success }) => {

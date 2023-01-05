@@ -10,25 +10,16 @@ const ProjectDisplay = props => {
   const [changed, setChanged] = useState([]);
   const [projectId, setProjectId] = useState(null);
 
-
-//   useEffect( () => {
-//     fetch('http://localhost:3000/journals?' + new URLSearchParams({
-//         user: '63b3234df79c9575703ac220'
-//     }))
-//     .then((response) => response.json())
-//     .then(data => {
-//         setEntries(data);
-//     })
-// }, [entries, setEntries])
-
-
+  const requestOption = {
+    credentials: 'include',
+  }
 
   //useEffect will fetch the task cards from backend and update the state?
   useEffect(() => {
     const url = 'http://localhost:3000/tasks';
     // console.log('how many times is useEffect fired?')
     if (!task.length) {
-      fetch(url)
+      fetch(url, requestOption)
         .then(res => res.json())
         .then(data => {
           // console.log(data);
@@ -59,6 +50,7 @@ const ProjectDisplay = props => {
     console.log('This is the url: ', url)
     const requestOption = {
       method: 'POST',
+      credentials: 'include'
     };
     fetch(url, requestOption)
       .then(res => res.json())
