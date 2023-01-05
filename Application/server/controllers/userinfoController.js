@@ -5,7 +5,6 @@ const Card = require('../models/cardModel.js');
 const userinfoController = {};
 
 userinfoController.getProjects = async (req, res, next) => {
-  req.session.user = 'William';
   console.log('req.session in userinfoController.getProjects: ', req.session);
   const user = await User.findOne({ username: req.session.user });
   console.log('User inside getProjects func: ',user);
