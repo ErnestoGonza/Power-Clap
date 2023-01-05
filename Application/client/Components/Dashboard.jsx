@@ -2,28 +2,28 @@ import React, { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../Context/GlobalState.jsx';
 
 const Dashboard = () => {
-  const url = 'http://localhost:3000/userinfo';
   const [username, setUsername] = useState(null);
   const [projects, setProjects] = useState([]);
+
   const requestOption = {
-    method: 'GET',
     credentials: 'include',
   }
 
-  const projectUrl = 'http://localhost:3000/userinfo/projects';
   useEffect(() => {
-    fetch(url, requestOption)
+    console.log('hello');
+    fetch('http://localhost:3000/userinfo', requestOption)
       .then(res => res.json())
       .then(data => {
         console.log('DATA FROM FIRST FETCH REQUEST IN DASHBOARD:', data);
         setUsername(data);
       })
       .catch(err => console.log('ERR in /userinfo fetch request', err));
+
     if (!projects.length) {
-      fetch(projectUrl, requestOption)
+      fetch('http://localhost:3000/userinfo/projects', requestOption)
         .then(res => res.json())
         .then(data => {
-          console.log(data);
+          console.log('data from /userinfo/projects', data);
           setProjects(data);
         })
         .catch(err => console.log('ERR in /userinfo/projects fetch request', err))
