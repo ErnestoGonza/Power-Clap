@@ -156,50 +156,57 @@ const ProjectDisplay = (props) => {
   }
 
   return (
-    <>
+    <section className="task-info">
       <div className="form-container">
-        Create Task Form
-        <form className="form" onSubmit={handleSubmit}>
-          <label htmlFor="description" id="description" name="description">
-            Task Description:{' '}
-          </label>
-          <input
-            type="text"
-            id="description"
-            name="description"
-            placeholder="description"
-          ></input>
-          <br />
-          <label htmlFor="dateStarted" id="dateStarted" name="dateStarted">
-            Date Started:{' '}
-          </label>
-          <input
-            type="text"
-            id="dateStarted"
-            name="dateStarted"
-            placeholder="date"
-          ></input>
-          <br />
-          <label htmlFor="deadline" id="deadline" name="deadline">
-            Deadline:{' '}
-          </label>
-          <input
-            type="text"
-            id="deadline"
-            name="deadline"
-            placeholder="deadline"
-          ></input>
-          <br />
-          <label htmlFor="Responsible" id="responsible" name="responsible">
-            Responsible By:{' '}
-          </label>
-          <input
-            type="text"
-            id="responsible"
-            name="responsible"
-            placeholder="responsible"
-          ></input>
-          <br />
+        <form className="form-component" onSubmit={handleSubmit}>
+          <h2>Create Task Form</h2>
+          <div className="input-component">
+            <label htmlFor="description" id="description" name="description">
+              Task Description:&nbsp;
+            </label>
+            <input
+              type="text"
+              id="description"
+              name="description"
+              placeholder="description"
+            ></input>
+          </div>
+
+          <div className="input-component">
+            <label htmlFor="dateStarted" id="dateStarted" name="dateStarted">
+              Date Started:&nbsp;
+            </label>
+            <input
+              type="text"
+              id="dateStarted"
+              name="dateStarted"
+              placeholder="date"
+            ></input>
+          </div>
+
+          <div className="input-component">
+            <label htmlFor="deadline" id="deadline" name="deadline">
+              Deadline:&nbsp;
+            </label>
+            <input
+              type="text"
+              id="deadline"
+              name="deadline"
+              placeholder="deadline"
+            ></input>
+          </div>
+
+          <div className="input-component">
+            <label htmlFor="Responsible" id="responsible" name="responsible">
+              Responsible By:&nbsp;
+            </label>
+            <input
+              type="text"
+              id="responsible"
+              name="responsible"
+              placeholder="responsible"
+            ></input>
+          </div>
           <input type="submit" value="Submit"></input>
         </form>
       </div>
@@ -225,7 +232,7 @@ const ProjectDisplay = (props) => {
           {completed}
         </div>
       </div>
-    </>
+    </section>
   );
 };
 
