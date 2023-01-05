@@ -46,7 +46,6 @@ const App = (props) => {
           </li> */}
                 </ul>
               </div>
-              <CreateProject />
               <Dashboard />
             </>
           }

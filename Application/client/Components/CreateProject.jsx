@@ -75,8 +75,8 @@ const CreateProject = (props) => {
           />
         </div>
         <div className="input-component">
-          <label htmlFor="projectDescription">Project Description: </label>
-          <textarea
+          <label htmlFor="projectDescription">Description: </label>
+          <input
             name="projectDescription"
             placeholder="Project Description"
             value={projectDescription}

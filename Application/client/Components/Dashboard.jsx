@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../Context/GlobalState.jsx';
 import { Link, Route, Routes } from 'react-router-dom';
 import ProjectDisplay from './ProjectDisplay.jsx';
+import CreateProject from './CreateProject.jsx';
+import TaskDisplay from './TaskDisplay.jsx';
 const Dashboard = () => {
   const [username, setUsername] = useState(null);
   const [projects, setProjects] = useState([]);
@@ -75,12 +77,17 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <>
-      <div className="button-filter">{projects}</div>
-      <section className="taskboard">
+    <div className="main-dashboard">
+      <div className="top-container">
+        <CreateProject />
         <ProjectDisplay currentProject={currentProject} />
-      </section>
-    </>
+      </div>
+      <div className="bottom-container">
+        <div className="projects-display">
+          <div className="button-filter">{projects}</div>
+        </div>
+      </div>
+    </div>
   );
 };
 
