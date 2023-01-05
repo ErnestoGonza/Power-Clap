@@ -36,16 +36,8 @@ const App = (props) => {
           path="/dashboard"
           element={
             <>
-              <div id="nav">
-                <ul>
-                  <li id="home">
-                    <Link to="/">logout</Link>
-                  </li>
-                  {/* <li id="test">
-            <Link to="/test">Project Display test</Link>
-          </li> */}
-                </ul>
-              </div>
+              <Link to="/">logout</Link>
+              <CreateProject />
               <Dashboard />
             </>
           }

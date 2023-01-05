@@ -79,14 +79,11 @@ const Dashboard = () => {
   return (
     <div className="main-dashboard">
       <div className="top-container">
-        <CreateProject />
-        <ProjectDisplay currentProject={currentProject} />
-      </div>
-      <div className="bottom-container">
         <div className="projects-display">
           <div className="button-filter">{projects}</div>
         </div>
       </div>
+      <ProjectDisplay currentProject={currentProject} />
     </div>
   );
 };

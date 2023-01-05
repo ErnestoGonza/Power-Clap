@@ -8,48 +8,50 @@ const port = process.env.PORT || 3000;
 const app = express();
 connectDB();
 
-
-// Server connects to the frontend without CORS restriction
-app .use(cors({
+// Server connects to the frontend without CORS restriction, credentials set to true to persist session
+app
+  .use(
+    cors({
       origin: 'http://localhost:5173',
       credentials: true,
-    }))
-    .use(express.json())
-    .use(express.urlencoded({ extended: true }))
-    // Sessions
-    .use(session({
-        secret: /*process.env.SECRET*/ 'YPUWB0EX9ISPOTMX7Q7W',
-        resave: false,
-        saveUninitialized: true
-    }))
+    })
+  )
+  .use(express.json())
+  .use(express.urlencoded({ extended: true }))
+  // Sessions -- hard coded secret, dotenv/process.env was not working
+  .use(
+    session({
+      secret: /*process.env.SECRET*/ 'YPUWB0EX9ISPOTMX7Q7W',
+      resave: false,
+      saveUninitialized: true,
+    })
+  );
 
-
+// ROUTERS
 const userRouter = require('./routes/userRouter');
 const taskRouter = require('./routes/taskRouter');
 const userinfoRouter = require('./routes/userinfoRouter');
 const authRouter = require('./routes/authRouter');
-const projectRouter = require('./routes/projectRouter')
-
+const projectRouter = require('./routes/projectRouter');
 
 // ROUTES
-app .use('/tasks', taskRouter)
-    .use('/userinfo', userinfoRouter)
-    .use('/user', userRouter)
-    .use('/auth', authRouter)
-    .use('/project', projectRouter)
-
+app
+  .use('/tasks', taskRouter)
+  .use('/userinfo', userinfoRouter)
+  .use('/user', userRouter)
+  .use('/auth', authRouter)
+  .use('/project', projectRouter);
 
 // app.get('/dashboard', (req, res) => {
 //   return res.status(200).json();
 // })
-
 
 // 404 Error
 app.use((req, res) => {
   res.status(404).send("This is not the page you're looking for...");
 });
 
-//Express global error handler
+// Express global error handler
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',

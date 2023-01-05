@@ -156,7 +156,7 @@ const ProjectDisplay = (props) => {
   }
 
   return (
-    <>
+    <section className="task-info">
       <div className="form-container">
         <form className="form-component" onSubmit={handleSubmit}>
           <h2>Create Task Form</h2>
@@ -232,7 +232,7 @@ const ProjectDisplay = (props) => {
           {completed}
         </div>
       </div>
-    </>
+    </section>
   );
 };
 
