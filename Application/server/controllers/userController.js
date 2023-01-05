@@ -3,7 +3,7 @@ const Project = require('../models/projectModel.js');
 const Card = require('../models/cardModel.js');
 const SALT_WORK_FACTOR = 10;
 const bcrypt = require('bcryptjs');
-
+const session = require('express-session');
 const userController = {};
 
 userController.signup = async (req, res, next) => {
@@ -39,9 +39,8 @@ userController.signup = async (req, res, next) => {
   }
 }
 
-userController.login = async (req, res, next) => {
+userController.login = (req, res, next) => {
   const { username, password } = req.body;
-
   try {
     User.findOne({ username }, (err, currUser) => {
       if (err) {
@@ -81,6 +80,11 @@ userController.login = async (req, res, next) => {
   } catch (err) {
     return next(err);
   }
+}
+
+userController.dummy = (req, res, next) => {
+  console.log('req.session: ', req.session);
+  return next();
 }
 
 userController.getProject = (req, res, next) => {
