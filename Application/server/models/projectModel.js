@@ -4,25 +4,24 @@ const projectSchema = mongoose.Schema({
   projectName: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
 
   projectDescription: {
     type: String,
-    required: true
+    required: true,
   },
   // managedBy: {
   //   type: ObjectId,
   //   ref: 'User',
   //   required: true
   // },
-  members: [{type: String}],
+  members: [{ type: String }],
   creator: {
     type: mongoose.Schema.Types.ObjectId,
   },
-  user: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-})
-
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+});
 
 const Project = mongoose.model('Project', projectSchema);
 

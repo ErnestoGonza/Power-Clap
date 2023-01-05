@@ -3,7 +3,7 @@
 // import { GlobalContext, GlobalProvider } from "./Context/GlobalContext"
 
 // make App as a dummy container to display various routes as nav bar
-import './App.css'
+
 import React from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import Login from './Components/Login.jsx';
@@ -14,7 +14,7 @@ import ProjectDisplay from './Components/ProjectDisplay.jsx';
 // import { useEffect } from 'react';
 // import { gapi } from 'gapi-script';
 
-const App = props => {
+const App = (props) => {
   // useEffect(() => {
   //   function start() {
   //      gapi.client.init({
@@ -26,31 +26,28 @@ const App = props => {
   // })
   return (
     <>
-    <header>
+      <header>
         <h1>powerClap</h1>
-    </header>
-      <div id='nav'>
-        <ul>
-          <li id='home'><Link to='/'>Home</Link></li>
-          <li id='test'><Link to='/test'>Project Display test</Link></li>
-        </ul>
-      </div>
+      </header>
 
       <Routes>
-        {/* <Route path='/' element={<Login />} /> */}
-        <Route path='/' element={<LoginContainer />} />
-        <Route path='/dashboard' element={<><CreateProject /><Dashboard /></>} />
-        <Route path='/test' element={<ProjectDisplay />} />
+        <Route path="/" element={<LoginContainer />} />
+        <Route
+          path="/dashboard"
+          element={
+            <>
+              <CreateProject />
+              <Dashboard />
+            </>
+          }
+        />
+        <Route path="/test" element={<ProjectDisplay />} />
       </Routes>
-    
     </>
-  )
-}
-
+  );
+};
 
 export default App;
-
-
 
 // use this to pass the global state to all children
 // const App = () => {
@@ -60,7 +57,7 @@ export default App;
 //    </GlobalProvider>
 //  )
 // };
- 
+
 // // use this component as your main app
 // const Main = () => {
 //  // use state variables by destructuring from useContext(context)
@@ -72,35 +69,8 @@ export default App;
 //    </>
 //  )
 // };
- 
+
 // export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // function App() {
 //   const [count, setCount] = useState(0)
