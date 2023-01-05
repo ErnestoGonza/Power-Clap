@@ -76,16 +76,6 @@ const Dashboard = () => {
 
   return (
     <>
-      <div id="nav">
-        <ul>
-          <li id="home">
-            <Link to="/">logout</Link>
-          </li>
-          {/* <li id="test">
-            <Link to="/test">Project Display test</Link>
-          </li> */}
-        </ul>
-      </div>
       <div className="button-filter">{projects}</div>
       <section className="taskboard">
         <ProjectDisplay currentProject={currentProject} />

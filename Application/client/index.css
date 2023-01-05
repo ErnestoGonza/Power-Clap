@@ -100,9 +100,9 @@ button:focus-visible {
 header {
   display: flex;
   justify-content: center;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-  padding: 10px;
+  margin-top: 6rem;
+
+  border: 1px solid red;
 }
 header h1 {
   font-size: 70px;
@@ -178,6 +178,19 @@ header h1 {
 }
 .edge-bottom {
   margin-bottom: 3rem;
+}
+
+.taskboard {
+}
+.form-description {
+  color: #e8e5e5;
+}
+.create-project-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid red;
 }
 @media (prefers-color-scheme: light) {
   :root {
