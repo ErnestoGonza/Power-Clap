@@ -39,7 +39,7 @@ const Login = ({ toggleForm }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(userInfo),
-        // credentials: 'include',
+        credentials: 'include',
       })
         .then((response) => response.json())
         .then(({ success }) => {
