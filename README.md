@@ -71,10 +71,12 @@ $ npm run dev
 
 # Iteration Roadmap
 
-1. _Implement OAuth:_
-   - Allow for each user to login through Google.
-2. _Add Test Cases:_
-   - Add testing for proper User Input, for both the Frontend and the Backend.
+1. _Modularize Backend:_
+   - From one server file to Server, Routers, and Controllers.
+2. _Update Styling:_
+   - Revamp styling.
+3. _Login & Signup Page:_
+   - User can login and signup. Session begins and persists with user.
 
 # Known Bugs
 

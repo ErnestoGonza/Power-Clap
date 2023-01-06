@@ -1,17 +1,19 @@
 const User = require('../models/userModel.js');
 const Project = require('../models/projectModel.js');
-const Card = require('../models/cardModel.js');
-const SALT_WORK_FACTOR = 10;
 const bcrypt = require('bcryptjs');
-const session = require('express-session');
+const SALT_WORK_FACTOR = 10;
+
+
 const userController = {};
 
+
+/* This is the signup controller. It is taking the username and password from the body of the request.
+It is then hashing the password and creating a new user in the database. */
 userController.signup = async (req, res, next) => {
   let { username, password } = req.body;
 
   await bcrypt.hash(password, SALT_WORK_FACTOR)
     .then((hashedPW) => {
-      console.log('hashedPW', hashedPW) 
       password = hashedPW
     })
     .catch(err => console.log(err));
@@ -39,6 +41,8 @@ userController.signup = async (req, res, next) => {
   }
 }
 
+/* This is the login controller. It is checking the database for the username and password. If the
+username and password are found and matched in the database, it will proceed to the next middleware. */
 userController.login = (req, res, next) => {
   const { username, password } = req.body;
   try {
@@ -50,14 +54,11 @@ userController.login = (req, res, next) => {
           message: { err: `${err}` }
         });
       } else {
-        // if username and password are found and matched in database, proceed to the next middleware
         if (currUser) {
-          console.log('currUser', currUser)
           const hashed = currUser.password
 
           bcrypt.compare(password, hashed)
             .then(result => {
-              //result returns a boolean value
               if(result) {
                 req.session.user = currUser.username;
                 req.session.save();
@@ -82,19 +83,16 @@ userController.login = (req, res, next) => {
   }
 }
 
-userController.dummy = (req, res, next) => {
-  console.log('req.session: ', req.session);
-  return next();
-}
 
+/* This is a controller that is finding a project by its id. */
 userController.getProject = (req, res, next) => {
   const { projectId } = req.body;
   try {
     Project.findById(projectId)
-      .then((project) => {
-        res.locals.project = project;
-        next();
-      })
+    .then((project) => {
+      res.locals.project = project;
+      next();
+    })
   } catch (err) {
     return next({
       log: 'Express error handler caught userController.getProject middleware error',
@@ -103,7 +101,6 @@ userController.getProject = (req, res, next) => {
     })
   }
 }
-
 
 
 userController.getUsers = (req, res, next) => {
@@ -115,6 +112,11 @@ userController.getUsers = (req, res, next) => {
   });
 }
 
+
+userController.dummy = (req, res, next) => {
+  console.log('req.session: ', req.session);
+  return next();
+}
 
 
 module.exports = userController;
