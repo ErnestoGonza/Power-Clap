@@ -2,16 +2,15 @@ import React, { useState, useContext } from 'react';
 import { GlobalContext } from '../Context/GlobalState';
 
 // Customized the useInput function to save user input on the login/signup page
-const useInput = init => {
+const useInput = (init) => {
   const [value, setValue] = useState(init);
-  const onChange = e => {
+  const onChange = (e) => {
     setValue(e.target.value);
   };
   return [value, onChange];
-}
+};
 
-const CreateProject = props => {
-
+const CreateProject = (props) => {
   const [projectName, projectNameOnChange] = useInput('');
   const [projectDescription, projectDescriptionOnChange] = useInput('');
   const [members, membersOnChange] = useInput('');
@@ -26,8 +25,8 @@ const CreateProject = props => {
     const projectInfo = {
       projectName,
       projectDescription,
-      members: members.split(',').map(el => el.trim()),
-    }
+      members: members.split(',').map((el) => el.trim()),
+    };
 
     // console.log(projectInfo);
 
@@ -50,36 +49,56 @@ const CreateProject = props => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(projectInfo),
-          }
+          };
           fetch(url, requestOption)
-            .then(res => res.json())
-            .then(data => {
-              console.log(data)
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
             })
-            .catch(err => console.log(err))
-        })
-
+            .catch((err) => console.log(err));
+        });
     }
-  }
+  };
 
   return (
-    <div>
+    <div className="create-project-form">
+      <form className="form-component">
+        <h2 className="form-description">Create A Project</h2>
+        <p style={{ color: 'red' }}>{message}</p>
+        <div className="input-component">
+          <label htmlFor="projectName">Name:&nbsp;</label>
+          <input
+            name="projectName"
+            placeholder="Project Name"
+            value={projectName}
+            onChange={projectNameOnChange}
+          />
+        </div>
+        <div className="input-component">
+          <label htmlFor="projectDescription">Description:&nbsp;</label>
+          <input
+            name="projectDescription"
+            placeholder="Project Description"
+            value={projectDescription}
+            onChange={projectDescriptionOnChange}
+          />
+        </div>
+        <div className="input-component">
+          <label htmlFor="members">Members:&nbsp;</label>
+          <input
+            name="members"
+            placeholder="Separate members by comma"
+            value={members}
+            onChange={membersOnChange}
+          />
+        </div>
 
-      <p><label htmlFor='projectName'>Project Name: </label>
-        <input name='projectName' placeholder='Project Name' value={projectName} onChange={projectNameOnChange} /></p>
-
-      <p><label htmlFor='projectDescription'>Project Description: </label>
-        <textarea name='projectDescription' placeholder='Project Description' value={projectDescription} onChange={projectDescriptionOnChange} /></p>
-
-      <p><label htmlFor='members'>Members: </label>
-        <input name='members' placeholder='Separate members by comma' value={members} onChange={membersOnChange} /></p>
-
-      <p style={{ color: 'red' }}>{message}</p>
-      <p><button onClick={handleCreateProject}>Create a new project</button></p>
-
+        <button className="createBtns" onClick={handleCreateProject}>
+          Create a new project
+        </button>
+      </form>
     </div>
-  )
-}
-
+  );
+};
 
 export default CreateProject;

@@ -7,12 +7,12 @@
 import React from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 import Login from './Components/Login.jsx';
+import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import LoginContainer from './Components/LoginContainer.jsx';
 import Dashboard from './Components/Dashboard.jsx';
 import CreateProject from './Components/CreateProject.jsx';
 import ProjectDisplay from './Components/ProjectDisplay.jsx';
-// import { useEffect } from 'react';
-// import { gapi } from 'gapi-script';
+import logoutIcon from './assets/logout_FILL1_wght400_GRAD0_opsz48.png';
 
 const App = (props) => {
   // useEffect(() => {
@@ -27,7 +27,7 @@ const App = (props) => {
   return (
     <>
       <header>
-        <h1>powerClap</h1>
+        <h1>PowerClap</h1>
       </header>
 
       <Routes>
@@ -36,6 +36,14 @@ const App = (props) => {
           path="/dashboard"
           element={
             <>
+              <div className="nav">
+                <Link to="/">
+                  <button className="log-out" type="button">
+                    <FaSignOutAlt />
+                    &nbsp; Sign Out
+                  </button>
+                </Link>
+              </div>
               <CreateProject />
               <Dashboard />
             </>

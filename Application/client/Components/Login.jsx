@@ -76,7 +76,7 @@ const Login = ({ toggleForm }) => {
           />
         </div>
 
-        <button className="btn" type="submit">
+        <button className="createBtns" type="submit">
           Log In
         </button>
         <div className="Account edge-bottom">

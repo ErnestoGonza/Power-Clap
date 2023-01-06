@@ -69,7 +69,9 @@ const Signup = ({ toggleForm }) => {
             onChange={passwordOnChange}
           />
         </div>
-        <button type="submit">Sign Up</button>
+        <button className="createBtns" type="submit">
+          Sign Up
+        </button>
         <div className="Account edge-bottom">
           Already have an account?&nbsp;
           <a onClick={() => toggleForm('login')}>Login</a>

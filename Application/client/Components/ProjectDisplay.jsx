@@ -33,7 +33,7 @@ const ProjectDisplay = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const taskInfo = {
-      project: currentProject,
+      project: '63b0c014072cf2ff4951654d',
       description: e.target.description.value,
       responsibleBy: e.target.responsible.value,
       startDate: e.target.dateStarted.value,
@@ -156,51 +156,58 @@ const ProjectDisplay = (props) => {
   }
 
   return (
-    <>
-      <div className="form-container">
-        Create Task Form
-        <form className="form" onSubmit={handleSubmit}>
-          <label htmlFor="description" id="description" name="description">
-            Task Description:{' '}
-          </label>
-          <input
-            type="text"
-            id="description"
-            name="description"
-            placeholder="description"
-          ></input>
-          <br />
-          <label htmlFor="dateStarted" id="dateStarted" name="dateStarted">
-            Date Started:{' '}
-          </label>
-          <input
-            type="text"
-            id="dateStarted"
-            name="dateStarted"
-            placeholder="date"
-          ></input>
-          <br />
-          <label htmlFor="deadline" id="deadline" name="deadline">
-            Deadline:{' '}
-          </label>
-          <input
-            type="text"
-            id="deadline"
-            name="deadline"
-            placeholder="deadline"
-          ></input>
-          <br />
-          <label htmlFor="Responsible" id="responsible" name="responsible">
-            Responsible By:{' '}
-          </label>
-          <input
-            type="text"
-            id="responsible"
-            name="responsible"
-            placeholder="responsible"
-          ></input>
-          <br />
-          <input type="submit" value="Submit"></input>
+    <section className="task-info">
+      <div className="form-container create-task-form">
+        <form className="form-component" onSubmit={handleSubmit}>
+          <h2>Create Task Form</h2>
+          <div className="input-component">
+            <label htmlFor="description" id="description" name="description">
+              Task:&nbsp;
+            </label>
+            <input
+              type="text"
+              id="description"
+              name="description"
+              placeholder="description"
+            ></input>
+          </div>
+
+          <div className="input-component">
+            <label htmlFor="dateStarted" id="dateStarted" name="dateStarted">
+              Started:&nbsp;
+            </label>
+            <input
+              type="text"
+              id="dateStarted"
+              name="dateStarted"
+              placeholder="date"
+            ></input>
+          </div>
+
+          <div className="input-component">
+            <label htmlFor="deadline" id="deadline" name="deadline">
+              Deadline:&nbsp;
+            </label>
+            <input
+              type="text"
+              id="deadline"
+              name="deadline"
+              placeholder="deadline"
+            ></input>
+          </div>
+
+          <div className="input-component">
+            <label htmlFor="Responsible" id="responsible" name="responsible">
+              Owner:&nbsp;
+            </label>
+            <input
+              type="text"
+              id="responsible"
+              name="responsible"
+              placeholder="responsible"
+            ></input>
+          </div>
+          <input className="createBtns" type="submit" value="Submit"></input>
         </form>
       </div>
 
@@ -225,7 +232,7 @@ const ProjectDisplay = (props) => {
           {completed}
         </div>
       </div>
-    </>
+    </section>
   );
 };
 
