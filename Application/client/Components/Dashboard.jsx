@@ -14,7 +14,7 @@ const Dashboard = () => {
     //make func to pull only tasks that match the projectName
     // fetch('http://localhost:3000/tasks');
     const matchProjectName = projectName.target.innerText;
-    setCurrentProject(matchProjectName);
+
     console.log('This is projectName', matchProjectName);
 
     let projectObj;
@@ -30,6 +30,8 @@ const Dashboard = () => {
       .catch((err) =>
         console.log('ERR in /userinfo/projects fetch request', err)
       );
+    console.log('This is the projectobj inside filterTasks func: ', projectObj);
+    setCurrentProject(projectObj._id);
     const projectTasks = [];
     await fetch('http://localhost:3000/tasks', requestOption)
       .then((res) => res.json())
@@ -57,6 +59,7 @@ const Dashboard = () => {
           data.forEach((projectObj, index) => {
             buttonElements.push(
               <button
+                className="createBtns"
                 key={index}
                 onClick={(projectid = projectObj.projectName) =>
                   filterTasks(projectid)
@@ -76,7 +79,10 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="button-filter">{projects}</div>
+      <div className="project-selector">
+        <h2>Please Select A Project</h2>
+        <div className="button-filter">{projects}</div>
+      </div>
       <section className="taskboard">
         <ProjectDisplay currentProject={currentProject} />
       </section>

@@ -33,7 +33,7 @@ const ProjectDisplay = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const taskInfo = {
-      project: currentProject,
+      project: '63b0c014072cf2ff4951654d',
       description: e.target.description.value,
       responsibleBy: e.target.responsible.value,
       startDate: e.target.dateStarted.value,
@@ -157,12 +157,12 @@ const ProjectDisplay = (props) => {
 
   return (
     <section className="task-info">
-      <div className="form-container">
+      <div className="form-container create-task-form">
         <form className="form-component" onSubmit={handleSubmit}>
           <h2>Create Task Form</h2>
           <div className="input-component">
             <label htmlFor="description" id="description" name="description">
-              Task Description:&nbsp;
+              Task:&nbsp;
             </label>
             <input
               type="text"
@@ -174,7 +174,7 @@ const ProjectDisplay = (props) => {
 
           <div className="input-component">
             <label htmlFor="dateStarted" id="dateStarted" name="dateStarted">
-              Date Started:&nbsp;
+              Started:&nbsp;
             </label>
             <input
               type="text"
@@ -198,7 +198,7 @@ const ProjectDisplay = (props) => {
 
           <div className="input-component">
             <label htmlFor="Responsible" id="responsible" name="responsible">
-              Responsible By:&nbsp;
+              Owner:&nbsp;
             </label>
             <input
               type="text"
@@ -207,7 +207,7 @@ const ProjectDisplay = (props) => {
               placeholder="responsible"
             ></input>
           </div>
-          <input type="submit" value="Submit"></input>
+          <input className="createBtns" type="submit" value="Submit"></input>
         </form>
       </div>
 

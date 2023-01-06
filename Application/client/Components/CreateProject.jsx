@@ -66,7 +66,7 @@ const CreateProject = (props) => {
         <h2 className="form-description">Create A Project</h2>
         <p style={{ color: 'red' }}>{message}</p>
         <div className="input-component">
-          <label htmlFor="projectName">Project Name: </label>
+          <label htmlFor="projectName">Name:&nbsp;</label>
           <input
             name="projectName"
             placeholder="Project Name"
@@ -75,7 +75,7 @@ const CreateProject = (props) => {
           />
         </div>
         <div className="input-component">
-          <label htmlFor="projectDescription">Description: </label>
+          <label htmlFor="projectDescription">Description:&nbsp;</label>
           <input
             name="projectDescription"
             placeholder="Project Description"
@@ -84,7 +84,7 @@ const CreateProject = (props) => {
           />
         </div>
         <div className="input-component">
-          <label htmlFor="members">Members: </label>
+          <label htmlFor="members">Members:&nbsp;</label>
           <input
             name="members"
             placeholder="Separate members by comma"
@@ -93,7 +93,9 @@ const CreateProject = (props) => {
           />
         </div>
 
-        <button onClick={handleCreateProject}>Create a new project</button>
+        <button className="createBtns" onClick={handleCreateProject}>
+          Create a new project
+        </button>
       </form>
     </div>
   );
