@@ -12,18 +12,15 @@ const connectDB = async () => {
 
     //for testing purpose only
     const URI =
-      'mongodb+srv://admin:adminPassword@cluster0.opir5pn.mongodb.net/?retryWrites=true&w=majority';
-    const conn = await mongoose.connect(URI);
+      'mongodb+srv://egonzalez442:UYPkR06rkk6jTzgp@cluster0.hv7gkdq.mongodb.net/';
+    await mongoose.connect(URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+    });
     console.log('MongoDB connected');
 
-    /*
-MONGO_URI = 'mongodb+srv://admin:adminPassword@cluster0.6jzitkw.mongodb.net/?retryWrites=true&w=majority'
-MONGO_URI_TEST = 'mongodb+srv://rachel:powerClap@dataportal.hyltuzo.mongodb.net/?retryWrites=true&w=majority'
-    */
-
-    // Console log the local host if the connection is successful
-    // console.log(`MongoDB Connected: ${ conn.connection.host }`.cyan.underline);
-    // The error handler
   } catch (error) {
     console.log(error);
     process.exit(1);
